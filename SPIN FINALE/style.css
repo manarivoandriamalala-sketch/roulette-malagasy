@@ -1,0 +1,624 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #0c1c2c 0%, #1a2d3b 100%);
+    color: #e8f4f8;
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.casino-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* En-tête élégant */
+.casino-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    background: linear-gradient(135deg, rgba(23, 45, 65, 0.9) 0%, rgba(35, 65, 90, 0.9) 100%);
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.casino-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+}
+
+.casino-header h1 {
+    color: #f8f9fa;
+    font-size: 2.2em;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #d4af37 0%, #f9e076 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.player-info {
+    display: flex;
+    gap: 40px;
+    font-size: 1.1em;
+}
+
+.credit, .current-bet {
+    color: #d4af37;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Layout principal */
+.game-layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Chips élégantes */
+.chips-panel {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.chip {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #d4af37, #b8941f);
+    color: #1a2d3b;
+    font-weight: 700;
+    font-size: 1.1em;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.chip::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+}
+
+.chip:hover {
+    transform: translateY(-3px) scale(1.1);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 
+        0 8px 20px rgba(212, 175, 55, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.chip.active {
+    border-color: #fff;
+    box-shadow: 
+        0 0 25px rgba(212, 175, 55, 0.8),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    animation: chipPulse 2s infinite;
+}
+
+@keyframes chipPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Table de roulette professionnelle */
+.betting-interface {
+    background: rgba(10, 92, 54, 0.1);
+    padding: 25px;
+    border-radius: 16px;
+    border: 1px solid rgba(139, 69, 19, 0.3);
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.betting-interface::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(139, 69, 19, 0.5), transparent);
+}
+
+.roulette-table {
+    background: linear-gradient(135deg, rgba(10, 55, 83, 0.9) 0%, rgba(76, 78, 79, 0.9) 100%);
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid #8b4513;
+    box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.2),
+        0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Grille des numéros */
+.numbers-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 15px;
+}
+
+.number-row {
+    display: flex;
+    gap: 2px;
+}
+
+.number-cell {
+    flex: 1;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.number-cell::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.number-cell:hover::before {
+    opacity: 1;
+}
+
+.number-cell.red {
+    background: linear-gradient(135deg, #c00 0%, #e00 100%);
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.number-cell.black {
+    background: linear-gradient(135deg, #000 0%, #333 100%);
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.number-cell.zero {
+    background: linear-gradient(135deg, #0a5c36 0%, #0d7746 100%);
+    color: white;
+    width: 70px;
+    font-weight: 700;
+}
+
+/* Paris extérieurs */
+.outside-bets {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.outside-row {
+    display: flex;
+    gap: 6px;
+}
+
+.outside-bet {
+    flex: 1;
+    height: 55px;
+    background: linear-gradient(135deg, #2a4a5c 0%, #3a5a6c 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9em;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.outside-bet::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.outside-bet:hover::before {
+    opacity: 1;
+}
+
+.outside-bet:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.red-bet {
+    background: linear-gradient(135deg, #c00 0%, #e00 100%);
+    color: white;
+}
+
+.black-bet {
+    background: linear-gradient(135deg, #000 0%, #333 100%);
+    color: white;
+}
+
+/* Section zéro */
+.zero-section {
+    position: absolute;
+    left: -80px;
+    top: 25px;
+    bottom: 25px;
+    display: flex;
+    align-items: center;
+}
+.zero-row {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.zero-row .number-cell.zero {
+    width: 2px;
+    margin-right: 1px;
+}
+
+/* Contrôles table */
+.table-controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.control-btn {
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #2a4a5c 0%, #3a5a6c 100%);
+    color: #e8f4f8;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.control-btn:hover {
+    background: linear-gradient(135deg, #3a5a6c 0%, #4a6a7c 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Section roulette */
+.roulette-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.roulette-container {
+    position: relative;
+    width: 380px;
+    height: 380px;
+    margin: 0 auto;
+}
+
+.wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    transition: transform 4s cubic-bezier(0.2, 0.8, 0.1, 0.9);
+    border: 12px solid #8b4513;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    background: #0a5c36;
+    overflow: hidden;
+}
+
+.wheel-canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.indicator {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, #d4af37 0%, #f9e076 100%);
+    clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+    z-index: 10;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+    border: 2px solid #b8941f;
+    border-radius: 2px;
+}
+
+/* Contrôles de jeu */
+.game-controls {
+    text-align: center;
+}
+
+.spin-btn {
+    background: linear-gradient(135deg, #d4af37 0%, #f9e076 100%);
+    color: #1a2d3b;
+    border: none;
+    padding: 18px 60px;
+    font-size: 1.3em;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 6px 20px rgba(212, 175, 55, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.spin-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.spin-btn:hover::before {
+    left: 100%;
+}
+
+.spin-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 10px 25px rgba(212, 175, 55, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.spin-btn:disabled {
+    background: linear-gradient(135deg, #4a5a6a 0%, #6a7a8a 100%);
+    color: #8a9aac;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Panel des résultats */
+.results-panel {
+    background: linear-gradient(135deg, rgba(23, 45, 65, 0.9) 0%, rgba(35, 65, 90, 0.9) 100%);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.last-results {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-weight: 600;
+    color: #d4af37;
+}
+
+.results-history {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.result-number {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.result-number.red { 
+    background: linear-gradient(135deg, #c00 0%, #e00 100%);
+    color: white;
+}
+
+.result-number.black { 
+    background: linear-gradient(135deg, #000 0%, #333 100%);
+    color: white;
+}
+
+.result-number.green { 
+    background: linear-gradient(135deg, #0a5c36 0%, #0d7746 100%);
+    color: white;
+}
+
+.game-result {
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 15px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Chips de pari */
+.bet-chip {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d4af37, #f9e076);
+    color: #1a2d3b;
+    font-size: 0.75em;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 
+        0 3px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    z-index: 10;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    animation: chipAppear 0.3s ease-out;
+}
+
+@keyframes chipAppear {
+    0% { transform: translate(-50%, -50%) scale(0); }
+    70% { transform: translate(-50%, -50%) scale(1.1); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.number-cell, .outside-bet {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Animations globales */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* États de victoire/défaite */
+.win-state {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(76, 175, 80, 0.1) 100%) !important;
+    border-color: rgba(76, 175, 80, 0.5) !important;
+}
+
+.loss-state {
+    background: linear-gradient(135deg, rgba(244, 67, 54, 0.2) 0%, rgba(244, 67, 54, 0.1) 100%) !important;
+    border-color: rgba(244, 67, 54, 0.5) !important;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .game-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .roulette-section {
+        order: -1;
+    }
+    
+    .roulette-container {
+        width: 320px;
+        height: 320px;
+    }
+    
+    .zero-section {
+        position: static;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .casino-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .player-info {
+        gap: 20px;
+    }
+    
+    .chips-panel {
+        flex-wrap: wrap;
+    }
+    
+    .chip {
+        width: 50px;
+        height: 50px;
+        font-size: 1em;
+    }
+}

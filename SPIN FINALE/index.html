@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roulette de Mana</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="casino-container">
+        <header class="casino-header">
+            <h1>ROULETTE MALAGASY DE MANA</h1>
+            <div class="player-info">
+                <div class="credit">SOLDE: <span id="credit">2000000</span> Ariary</div>
+                <div class="current-bet">MISE TOTALE: <span id="totalBet">0</span> Ariary</div>
+            </div>
+        </header>
+
+        <div class="game-layout">
+            <!-- Table de mise -->
+            <div class="betting-interface">
+                <div class="chips-panel">
+                    <div class="chip" data-amount="1000">1000</div>
+                    <div class="chip" data-amount="2000">2000</div>
+                    <div class="chip" data-amount="5000">5000</div>
+                    <div class="chip" data-amount="10000">10000</div>
+                    <div class="chip" data-amount="20000">20000</div>
+                </div>
+
+                <div class="roulette-table">
+                    <!-- Numéros 1-36 -->
+                    <div class="numbers-grid">
+                        <div class="number-row">
+                            <div class="number-cell" data-number="3">3</div>
+                            <div class="number-cell" data-number="6">6</div>
+                            <div class="number-cell" data-number="9">9</div>
+                            <div class="number-cell" data-number="12">12</div>
+                            <div class="number-cell" data-number="15">15</div>
+                            <div class="number-cell" data-number="18">18</div>
+                            <div class="number-cell" data-number="21">21</div>
+                            <div class="number-cell" data-number="24">24</div>
+                            <div class="number-cell" data-number="27">27</div>
+                            <div class="number-cell" data-number="30">30</div>
+                            <div class="number-cell" data-number="33">33</div>
+                            <div class="number-cell" data-number="36">36</div>
+                        </div>
+                        <div class="number-row">
+                            <div class="number-cell" data-number="2">2</div>
+                            <div class="number-cell" data-number="5">5</div>
+                            <div class="number-cell" data-number="8">8</div>
+                            <div class="number-cell" data-number="11">11</div>
+                            <div class="number-cell" data-number="14">14</div>
+                            <div class="number-cell" data-number="17">17</div>
+                            <div class="number-cell" data-number="20">20</div>
+                            <div class="number-cell" data-number="23">23</div>
+                            <div class="number-cell" data-number="26">26</div>
+                            <div class="number-cell" data-number="29">29</div>
+                            <div class="number-cell" data-number="32">32</div>
+                            <div class="number-cell" data-number="35">35</div>
+                        </div>
+                        <div class="number-row">
+                            <div class="number-cell" data-number="1">1</div>
+                            <div class="number-cell" data-number="4">4</div>
+                            <div class="number-cell" data-number="7">7</div>
+                            <div class="number-cell" data-number="10">10</div>
+                            <div class="number-cell" data-number="13">13</div>
+                            <div class="number-cell" data-number="16">16</div>
+                            <div class="number-cell" data-number="19">19</div>
+                            <div class="number-cell" data-number="22">22</div>
+                            <div class="number-cell" data-number="25">25</div>
+                            <div class="number-cell" data-number="28">28</div>
+                            <div class="number-cell" data-number="31">31</div>
+                            <div class="number-cell" data-number="34">34</div>
+                        </div>
+                    </div>
+
+                    <!-- Paris extérieurs -->
+                    <div class="outside-bets">
+                        <div class="outside-row">
+                            <div class="outside-bet" data-bet="1-12">1-12</div>
+                            <div class="outside-bet" data-bet="13-24">13-24</div>
+                            <div class="outside-bet" data-bet="25-36">25-36</div>
+                        </div>
+                        <div class="outside-row">
+                            <div class="outside-bet" data-bet="1-18">1-18</div>
+                            <div class="outside-bet" data-bet="even">PAIR</div>
+                            <div class="outside-bet red-bet" data-bet="red">ROUGE</div>
+                            <div class="outside-bet black-bet" data-bet="black">NOIR</div>
+                            <div class="outside-bet" data-bet="odd">IMPAIR</div>
+                            <div class="outside-bet" data-bet="19-36">19-36</div>
+                        </div>
+                    </div>
+
+                    <!-- Zéro -->
+                    <div class="number-row zero-row">
+                              <div class="number-cell zero" data-number="0">0</div>
+                    </div>
+                </div>
+
+                <div class="table-controls">
+                    <button id="clearBets" class="control-btn">EFFACER</button>
+                    <button id="repeatBet" class="control-btn">RÉPÉTER</button>
+                    <button id="rechargeBtn" class="control-btn recharge-btn">💰 RECHARGER</button>
+                </div>
+            </div>
+
+            <!-- Roulette et contrôles -->
+            <div class="roulette-section">
+                <div class="roulette-container">
+                    <div class="wheel">
+                        <canvas class="wheel-canvas" id="wheelCanvas" width="350" height="350"></canvas>
+                    </div>
+                    <div class="indicator"></div>
+                </div>
+
+                <div class="game-controls">
+                    <button class="spin-btn" id="spinBtn">JOUER</button>
+                </div>
+
+                <div class="results-panel">
+                    <div class="last-results">
+                        <span>Derniers tirages:</span>
+                        <div class="results-history" id="resultsHistory"></div>
+                    </div>
+                    <div class="game-result" id="gameResult">
+                        Placez vos mises
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

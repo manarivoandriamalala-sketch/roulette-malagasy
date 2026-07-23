@@ -1,0 +1,181 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.game-container {
+    text-align: center;
+}
+
+.roulette-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+}
+
+.wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    transition: transform 4s cubic-bezier(0.2, 0.8, 0.1, 0.9);
+    border: 15px solid #8b4513;
+    box-shadow: 0 0 40px rgba(0,0,0,0.8);
+    background: #0a5c36;
+    overflow: hidden;
+}
+
+.wheel-canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.indicator {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    background: #ffd700;
+    clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+    z-index: 10;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.6));
+    border: 2px solid #b8860b;
+}
+
+.center-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: #f0f0f0;
+    border-radius: 50%;
+    border: 8px solid #8b4513;
+    z-index: 5;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+}
+
+.controls {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.spin-btn {
+    background: linear-gradient(145deg, #8b4513, #654321);
+    color: #ffd700;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
+    border: 2px solid #ffd700;
+}
+
+.spin-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(139, 69, 19, 0.6);
+}
+
+.spin-btn:disabled {
+    background: #666;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.result {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.winning-number {
+    font-size: 2em;
+    color: #ffeb3b;
+    text-shadow: 0 0 10px rgba(255, 235, 59, 0.8);
+    animation: pulse 0.5s ease-in-out 3;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+/* Système de Paris */
+.betting-panel {
+    background: rgba(139, 69, 19, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border: 2px solid #ffd700;
+}
+
+.credit-info {
+    display: flex;
+    justify-content: space-around;
+    color: #ffd700;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.number-selection {
+    text-align: center;
+}
+
+.bet-amount {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.chip {
+    background: #ffd700;
+    color: #8b4513;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.chip:hover {
+    transform: scale(1.1);
+}
+
+.chip.active {
+    background: #c00;
+    color: white;
+}
+
+.selected-info {
+    color: #ffd700;
+    font-weight: bold;
+}
